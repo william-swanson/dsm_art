@@ -1,5 +1,5 @@
 package com.willard5991.dsmarthub;
-import android.location.Location;
+//import android.location.Location;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -16,7 +16,7 @@ public class exhibit extends RealmObject
     private String artist;
     private int year;
     private String medium;
-    private Location loc;
+    //private Location loc;
     private int clicks;
     public byte[] image;
 
@@ -49,11 +49,11 @@ public class exhibit extends RealmObject
         this.medium = medium;
     }
 
-    public Location getLoc() { return loc; }
+    //public Location getLoc() { return loc; }
 
-    public void setLoc(Location loc) {
-        this.loc = loc;
-    }
+    //public void setLoc(Location loc) {
+    //    this.loc = loc;
+    //}
 
     public int getClicks() {
         return clicks;
