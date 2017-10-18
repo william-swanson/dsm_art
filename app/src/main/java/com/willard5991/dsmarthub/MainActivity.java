@@ -1,5 +1,6 @@
 package com.willard5991.dsmarthub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Discover"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent intent = new Intent(getBaseContext(), AddActivity.class); //TODO: will need to update the name of the class
-////                startActivity(intent);
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), AddActivity.class); //TODO: will need to update the name of the class
+                startActivity(intent);
+            }
+        });
     }
 
 }
