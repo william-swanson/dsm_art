@@ -33,6 +33,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+
         imageButton = (ImageButton) findViewById(R.id.add_image);
         nameView = (EditText) findViewById(R.id.add_name);
         artistView = (EditText) findViewById(R.id.add_artist);
@@ -40,7 +41,7 @@ public class AddActivity extends AppCompatActivity {
         mediumView = (EditText) findViewById(R.id.add_medium);
         saveButton = (Button) findViewById(R.id.add_button);
         realm = Realm.getDefaultInstance();
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        //locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -52,16 +53,7 @@ public class AddActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
 
-                if(requestCode == 1 && resultCode == RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    imageButton.setImageBitmap(imageBitmap);
-                }
-            }
         });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -97,5 +89,21 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageButton.setImageBitmap(imageBitmap);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }
