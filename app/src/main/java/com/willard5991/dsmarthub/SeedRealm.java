@@ -19,15 +19,15 @@ public class SeedRealm {
 
     private void login(final String email, final String password, final String username){
 
-        if(SyncUser.currentUser() != null){
-            SyncUser.currentUser().logout();
-
-            Realm realm = Realm.getDefaultInstance();
-            if(realm != null){
-                realm.close();
-                Realm.deleteRealm(realm.getConfiguration());
-            }
-        }
+//        if(SyncUser.currentUser() != null){
+//            SyncUser.currentUser().logout();
+//
+//            Realm realm = Realm.getDefaultInstance();
+//            if(realm != null){
+//                realm.close();
+//                Realm.deleteRealm(realm.getConfiguration());
+//            }
+//        }
 
         SyncCredentials myCredentials = SyncCredentials.usernamePassword(email,password,false);
         SyncUser.loginAsync(myCredentials, "http://52.205.194.154:9080",new SyncUser.Callback(){
