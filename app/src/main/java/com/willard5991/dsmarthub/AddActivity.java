@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.MediaStore;
@@ -14,18 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+
 import java.io.ByteArrayOutputStream;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity implements LocationListener {
     private ImageButton imageButton;
     private EditText nameView;
     private EditText artistView;
     private EditText yearView;
     private EditText mediumView;
     private Button saveButton;
-    private LocationManager locationManager;
     private Realm realm;
-
+    private double longitude;
+    private double latitude;
 
 
     @Override
@@ -41,8 +43,6 @@ public class AddActivity extends AppCompatActivity {
         mediumView = (EditText) findViewById(R.id.add_medium);
         saveButton = (Button) findViewById(R.id.add_button);
         realm = Realm.getDefaultInstance();
-        //locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,5 +105,26 @@ public class AddActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         realm.close();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        longitude = location.getLongitude();
+        latitude = location.getLatitude();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }
