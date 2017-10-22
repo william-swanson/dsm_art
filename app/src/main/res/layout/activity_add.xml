@@ -86,4 +86,25 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_year" />
 
+    <TextView
+        android:id="@+id/latitudeView"
+        android:layout_width="186dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="-1dp"
+        android:text="TextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_medium" />
+
+    <TextView
+        android:id="@+id/longitudeView"
+        android:layout_width="184dp"
+        android:layout_height="43dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-1dp"
+        android:text="TextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_medium"
+        tools:layout_editor_absoluteX="192dp" />
+
 </android.support.constraint.ConstraintLayout>

@@ -14,9 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+
+import io.realm.Realm;
 
 public class AddActivity extends AppCompatActivity implements LocationListener {
     private ImageButton imageButton;
@@ -24,6 +29,8 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
     private EditText artistView;
     private EditText yearView;
     private EditText mediumView;
+    private TextView latitudeView;
+    private TextView longitudeView;
     private Button saveButton;
     private Realm realm;
     private double longitude;
@@ -42,6 +49,8 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
         yearView = (EditText) findViewById(R.id.add_year);
         mediumView = (EditText) findViewById(R.id.add_medium);
         saveButton = (Button) findViewById(R.id.add_button);
+        latitudeView = (TextView) findViewById(R.id.latitudeView);
+        longitudeView = (TextView) findViewById(R.id.longitudeView);
         realm = Realm.getDefaultInstance();
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +120,9 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(Location location) {
         longitude = location.getLongitude();
         latitude = location.getLatitude();
+        latitudeView.setText(Double.toString(latitude));
+        longitudeView.setText(Double.toString(longitude));
+
     }
 
     @Override
