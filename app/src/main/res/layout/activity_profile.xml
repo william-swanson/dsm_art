@@ -7,115 +7,119 @@
     tools:context="com.willard5991.dsmarthub.ProfileActivity">
 
     <EditText
-        android:id="@+id/exhibit_medium"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
+        android:id="@+id/exhibit_year"
+        android:layout_width="115dp"
+        android:layout_height="37dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="126dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:singleLine="false"
-        android:text="medium"
         android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <Button
+        android:id="@+id/add_photo_button"
+        android:layout_width="110dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="74dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/pin_button"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <EditText
+        android:id="@+id/exhibit_desc"
+        android:layout_width="232dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="104dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exhibit_name" />
 
     <EditText
-        android:id="@+id/exhibit_year"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
+        android:id="@+id/exhibit_medium"
+        android:layout_width="115dp"
+        android:layout_height="25dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="73dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:singleLine="false"
-        android:text="year"
+        android:text="fffffff"
         android:textAllCaps="false"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.077"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exhibit_name" />
+        tools:layout_editor_absoluteY="309dp" />
 
     <EditText
         android:id="@+id/exhibit_artist"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
+        android:layout_width="115dp"
+        android:layout_height="37dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:singleLine="false"
-        android:text="artist"
         android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exhibit_name" />
+        tools:layout_editor_absoluteY="260dp" />
 
     <Button
         android:id="@+id/nav_button"
         android:layout_width="110dp"
         android:layout_height="43dp"
-        android:layout_marginRight="34dp"
-        android:text="navigte"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="356dp" />
-
-    <ViewFlipper
-        android:id="@+id/profile_pics"
-        android:layout_width="339dp"
-        android:layout_height="205dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="54dp"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/pin_button"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/exhibit_name"
-        android:layout_width="175dp"
-        android:layout_height="57dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:singleLine="false"
-        android:text="Name"
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_pics" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="194dp" />
 
     <Button
         android:id="@+id/pin_button"
         android:layout_width="110dp"
         android:layout_height="43dp"
-        android:layout_marginRight="34dp"
-        android:text="map "
+        android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="413dp" />
+        tools:layout_editor_absoluteY="442dp" />
 
     <EditText
         android:id="@+id/exhibit_dist"
-        android:layout_width="105dp"
-        android:layout_height="53dp"
+        android:layout_width="86dp"
+        android:layout_height="42dp"
         android:ems="10"
         android:inputType="number"
         android:text=".1"
@@ -123,6 +127,22 @@
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="283dp" />
+        tools:layout_editor_absoluteX="282dp"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <ViewFlipper
+        android:id="@+id/profile_pics"
+        android:layout_width="339dp"
+        android:layout_height="205dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </ViewFlipper>
+
 </android.support.constraint.ConstraintLayout>

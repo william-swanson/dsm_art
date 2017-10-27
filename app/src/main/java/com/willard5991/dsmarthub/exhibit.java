@@ -1,6 +1,8 @@
 package com.willard5991.dsmarthub;
 //import android.location.Location;
 
+import java.util.ArrayList;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.RealmList;
@@ -14,12 +16,11 @@ public class exhibit extends RealmObject
     @PrimaryKey
     private String name;
     private String artist;
-    private int year;
+    private String year;
     private String medium;
-    //private Location loc;
+    private String desc;
     private int clicks;
-    public byte[] image;
-
+    private RealmByteArray picArray;
 
     public String getName() { return name; }
 
@@ -35,9 +36,9 @@ public class exhibit extends RealmObject
         this.artist = artist;
     }
 
-    public int getYear() { return year; }
+    public String getYear() { return year; }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -45,15 +46,17 @@ public class exhibit extends RealmObject
         return medium;
     }
 
+    public void setDesc (String desc) {
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
     public void setMedium (String medium) {
         this.medium = medium;
     }
-
-    //public Location getLoc() { return loc; }
-
-    //public void setLoc(Location loc) {
-    //    this.loc = loc;
-    //}
 
     public int getClicks() {
         return clicks;
@@ -63,13 +66,14 @@ public class exhibit extends RealmObject
         this.clicks = clicks;
     }
 
-    public byte[] getImage(){
-        return image;
+    public  RealmByteArray getArray(){
+        return picArray;
     }
 
-    public void setImage(byte[] image){
-        this.image=image;
+    public void setArray(RealmByteArray picArray){
+        this.picArray=picArray;
     }
+
 
 }
 
