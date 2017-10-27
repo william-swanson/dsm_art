@@ -69,18 +69,17 @@ public class MainActivity extends AppCompatActivity {
 
                         final exhibit exh = new exhibit();
 
-
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
 
-                                exh.setArtist("test");
-                                exh.setDesc("test");
-                                exh.setMedium("test");
-                                exh.setYear("test");
-                                exh.setName("test");
-
-                                realm.copyToRealmOrUpdate(exh);
+//                                exh.setArtist("test");
+//                                exh.setDesc("test");
+//                                exh.setMedium("test");
+//                                exh.setYear("test");
+//                                exh.setName("test");
+//
+//                                realm.copyToRealmOrUpdate(exh);
                             }
                         });
 
@@ -91,28 +90,24 @@ public class MainActivity extends AppCompatActivity {
                                 final exhibit art = realm.where(exhibit.class).equalTo("name","test").findFirst();
 
                                 Photo p1 = new Photo();
-                                p1.setName("test");
+                                p1.setName("test2");
                                 BitmapDrawable image = (BitmapDrawable) getResources().getDrawable(R.drawable.b);
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                 byte[] imageInByte = baos.toByteArray();
                                 p1.setImage(imageInByte);
 
-                                Photo p2 = new Photo();
-                                p2.setName("testA");
-                                p2.setImage(imageInByte);
+//                                Photo p2 = new Photo();
+//                                p2.setName("testA");
+//                                p2.setImage(imageInByte);
 
-                                realm.copyToRealm(p1);
-                                realm.copyToRealm(p2);
-
+//                                realm.copyToRealm(p1);
+//                                realm.copyToRealm(p2);
 
                                 art.appendPhoto(p1);
-                                art.appendPhoto(p2);
+//                                art.appendPhoto(p2);
                             }
                         });
-
-
-
 
                         realm.close();
 

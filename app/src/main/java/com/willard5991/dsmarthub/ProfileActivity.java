@@ -37,6 +37,8 @@ public class ProfileActivity extends AppCompatActivity
     private int art_clicks;
     private ImageView pic;
 
+    private float initialX;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,6 +64,38 @@ public class ProfileActivity extends AppCompatActivity
         art_medium.setText(art.getMedium());
 
         list = art.getPhotos();
+
+        flip.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        initialX = event.getX();
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        float finalX = event.getX();
+                        if (initialX > finalX) {
+                            if (flip.getDisplayedChild() == 1)
+                                break;
+
+ /*TruitonFlipper.setInAnimation(this, R.anim.in_right);
+ TruitonFlipper.setOutAnimation(this, R.anim.out_left);*/
+
+                            flip.showNext();
+                        } else {
+                            if (flip.getDisplayedChild() == 0)
+                                break;
+
+ /*TruitonFlipper.setInAnimation(this, R.anim.in_left);
+ TruitonFlipper.setOutAnimation(this, R.anim.out_right);*/
+
+                            flip.showPrevious();
+                        }
+                        return true;
+                }
+                return false;
+            }
+        });
 
         for (Photo photo : list) {
             setFlipperImage(photo.getImage());
