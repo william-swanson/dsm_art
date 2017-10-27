@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 import android.view.MotionEvent;
 import android.view.Menu;
 import android.app.Activity;
+import android.widget.ViewFlipper;
+
 import java.io.ByteArrayOutputStream;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class ProfileActivity extends AppCompatActivity
@@ -31,8 +33,9 @@ public class ProfileActivity extends AppCompatActivity
     private Realm realm;
     private ViewFlipper flip;
     private Button add_photo_button;
-    private RealmByteArray list;
+    private RealmList<Photo> list;
     private int art_clicks;
+    private ImageView pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,9 +60,12 @@ public class ProfileActivity extends AppCompatActivity
         art_year.setText(art.getYear());
         art_desc.setText(art.getDesc());
         art_medium.setText(art.getMedium());
-        list= art.getArray();
-        byte [] flipper = list[];
-        flip.setFactory(flipper);
+
+        list = art.getPhotos();
+
+        for (Photo photo : list) {
+            setFlipperImage(photo.getImage());
+        }
 
         realm.executeTransaction(new Realm.Transaction()
         {
@@ -68,48 +74,48 @@ public class ProfileActivity extends AppCompatActivity
                 art_clicks = art.getClicks() + 1;
             }
         });
-
-        @Override
-        public boolean onTouchEvent(MotionEvent touchevent)
-        {
-            switch(touchevent.getAction()){
-                case MotionEvent.ACTION_
-            }
-        }
-
-
-        add_photo_button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick (View view)
-            {
-                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePicture.resolveActivity(getPackageManager()) != null)
-                {
-                    startActivityForResult(takePicture, 1);
-                }
-                realm.executeTransaction(new Realm.Transaction()
-                {
-                    @Override
-                    public void execute(Realm realm)
-                    {
-                        BitmapDrawable image = (BitmapDrawable)add_photo_button.getDrawable();
-                        ByteArrayOutputStream boas=new ByteArrayOutputStream();
-                        image.getBitmap().compress(Bitmap.CompressFormat.JPEG,100,boas);
-                        byte[] imageInByte = boas.toByteArray();
-                        list.byteArray.add(imageInByte);
-                        art.setArray(list);
-                    }
-                });
-                for (int i = 0; i < list.byteArray.size() ; i++)
-                {
-
-                    setFlipperImage(list.byteArray.get(i));
-                }
-            }
+//
+//        @Override
+//        public boolean onTouchEvent(MotionEvent touchevent)
+//        {
+//            switch(touchevent.getAction()){
+//                case MotionEvent.ACTION_
+//            }
+//        }
 
 
-        });
+//        add_photo_button.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick (View view)
+//            {
+//                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if (takePicture.resolveActivity(getPackageManager()) != null)
+//                {
+//                    startActivityForResult(takePicture, 1);
+//                }
+//                realm.executeTransaction(new Realm.Transaction()
+//                {
+//                    @Override
+//                    public void execute(Realm realm)
+//                    {
+//                        BitmapDrawable image = (BitmapDrawable)add_photo_button.getDrawable();
+//                        ByteArrayOutputStream boas=new ByteArrayOutputStream();
+//                        image.getBitmap().compress(Bitmap.CompressFormat.JPEG,100,boas);
+//                        byte[] imageInByte = boas.toByteArray();
+//                        list.byteArray.add(imageInByte);
+//                        art.setArray(list);
+//                    }
+//                });
+//                for (int i = 0; i < list.byteArray.size() ; i++)
+//                {
+//
+//                    setFlipperImage(list.byteArray.get(i));
+//                }
+//            }
+//
+//
+//        });
 
 
 
@@ -122,15 +128,16 @@ public class ProfileActivity extends AppCompatActivity
         super.onActivityResult(requestCode,resultCode,data);
         Bundle extras = data.getExtras();
         Bitmap imageBitmap=(Bitmap)extras.get("data");
-        add_photo_button.setImageBitmap(imageBitmap);
+//        add_photo_button.setImageBitmap(imageBitmap);
     }
 
     private void setFlipperImage(byte[] res)
     {
-        Log.i("Set Flipper Called", res+ "");
         Bitmap bitmap = BitmapFactory.decodeByteArray(res, 0, res.length);
         ImageView image = new ImageView(getApplicationContext());
         image.setImageBitmap(bitmap);
+
+        Log.v("add view", "image");
         flip.addView(image);
     }
 

@@ -1,8 +1,6 @@
 package com.willard5991.dsmarthub;
 //import android.location.Location;
 
-import java.util.ArrayList;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.RealmList;
@@ -20,7 +18,7 @@ public class exhibit extends RealmObject
     private String medium;
     private String desc;
     private int clicks;
-    private RealmByteArray picArray;
+    public RealmList<Photo> photos;
 
     public String getName() { return name; }
 
@@ -66,14 +64,16 @@ public class exhibit extends RealmObject
         this.clicks = clicks;
     }
 
-    public  RealmByteArray getArray(){
-        return picArray;
+    public RealmList<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setArray(RealmByteArray picArray){
-        this.picArray=picArray;
+    public void setPhotos(RealmList<Photo> photos) {
+        this.photos = photos;
     }
 
-
+    public void appendPhoto(Photo photo) {
+        this.photos.add(photo);
+    }
 }
 
