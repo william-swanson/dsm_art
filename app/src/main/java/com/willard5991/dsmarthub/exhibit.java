@@ -1,6 +1,8 @@
 package com.willard5991.dsmarthub;
 //import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.RealmList;
