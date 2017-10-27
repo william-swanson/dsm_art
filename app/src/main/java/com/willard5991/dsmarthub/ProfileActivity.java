@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.MotionEvent;
@@ -33,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity
     private TextView art_medium;
     private Realm realm;
     private ViewFlipper flip;
-    private Button add_photo_button;
+    private ImageButton add_photo_button;
     private RealmList<Photo> list;
     private int art_clicks;
     private ImageView pic;
@@ -55,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity
         art_desc= (TextView) findViewById(R.id.exhibit_desc);
         art_medium=(TextView) findViewById(R.id.exhibit_medium);
         flip = (ViewFlipper) findViewById(R.id.profile_pics);
-        add_photo_button=(Button) findViewById(R.id.add_photo_button);
+        add_photo_button=(ImageButton) findViewById(R.id.add_photo_button);
 
         realm = Realm.getDefaultInstance();
 
