@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.view.MotionEvent;
 import android.view.Menu;
 import android.app.Activity;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.io.ByteArrayOutputStream;
@@ -38,12 +39,15 @@ public class ProfileActivity extends AppCompatActivity
     private ImageView pic;
 
     private float initialX;
+    private exhibit art;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        pic = new ImageView(this);
 
         art_name= (TextView) findViewById(R.id.exhibit_name);
         art_artist= (TextView) findViewById(R.id.exhibit_artist);
@@ -56,14 +60,16 @@ public class ProfileActivity extends AppCompatActivity
         realm = Realm.getDefaultInstance();
 
         String name = (String) getIntent().getStringExtra("exhibit");
-        final exhibit art = realm.where(exhibit.class).equalTo("name",name).findFirst();
+        art = realm.where(exhibit.class).equalTo("name",name).findFirst();
         art_name.setText(art.getName());
         art_artist.setText(art.getArtist());
         art_year.setText(art.getYear());
         art_desc.setText(art.getDesc());
         art_medium.setText(art.getMedium());
 
-        list = art.getPhotos();
+        reload();
+
+//        flip.setAutoStart(true);
 
         flip.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -75,16 +81,16 @@ public class ProfileActivity extends AppCompatActivity
                     case MotionEvent.ACTION_UP:
                         float finalX = event.getX();
                         if (initialX > finalX) {
-                            if (flip.getDisplayedChild() == 1)
-                                break;
+//                            if (flip.getDisplayedChild() == 1)
+//                                break;
 
  /*TruitonFlipper.setInAnimation(this, R.anim.in_right);
  TruitonFlipper.setOutAnimation(this, R.anim.out_left);*/
 
                             flip.showNext();
                         } else {
-                            if (flip.getDisplayedChild() == 0)
-                                break;
+//                            if (flip.getDisplayedCh ild() == 0)
+//                                break;
 
  /*TruitonFlipper.setInAnimation(this, R.anim.in_left);
  TruitonFlipper.setOutAnimation(this, R.anim.out_right);*/
@@ -97,10 +103,6 @@ public class ProfileActivity extends AppCompatActivity
             }
         });
 
-        for (Photo photo : list) {
-            setFlipperImage(photo.getImage());
-        }
-
         realm.executeTransaction(new Realm.Transaction()
         {
             @Override
@@ -108,52 +110,19 @@ public class ProfileActivity extends AppCompatActivity
                 art_clicks = art.getClicks() + 1;
             }
         });
-//
-//        @Override
-//        public boolean onTouchEvent(MotionEvent touchevent)
-//        {
-//            switch(touchevent.getAction()){
-//                case MotionEvent.ACTION_
-//            }
-//        }
 
-
-//        add_photo_button.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick (View view)
-//            {
-//                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                if (takePicture.resolveActivity(getPackageManager()) != null)
-//                {
-//                    startActivityForResult(takePicture, 1);
-//                }
-//                realm.executeTransaction(new Realm.Transaction()
-//                {
-//                    @Override
-//                    public void execute(Realm realm)
-//                    {
-//                        BitmapDrawable image = (BitmapDrawable)add_photo_button.getDrawable();
-//                        ByteArrayOutputStream boas=new ByteArrayOutputStream();
-//                        image.getBitmap().compress(Bitmap.CompressFormat.JPEG,100,boas);
-//                        byte[] imageInByte = boas.toByteArray();
-//                        list.byteArray.add(imageInByte);
-//                        art.setArray(list);
-//                    }
-//                });
-//                for (int i = 0; i < list.byteArray.size() ; i++)
-//                {
-//
-//                    setFlipperImage(list.byteArray.get(i));
-//                }
-//            }
-//
-//
-//        });
-
-
-
-
+        add_photo_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePicture.resolveActivity(getPackageManager()) != null)
+                {
+                    startActivityForResult(takePicture, 1);
+                }
+            }
+        });
     }
 
     @Override
@@ -162,7 +131,25 @@ public class ProfileActivity extends AppCompatActivity
         super.onActivityResult(requestCode,resultCode,data);
         Bundle extras = data.getExtras();
         Bitmap imageBitmap=(Bitmap)extras.get("data");
-//        add_photo_button.setImageBitmap(imageBitmap);
+        pic.setImageBitmap(imageBitmap);
+
+        realm.executeTransaction(new Realm.Transaction()
+        {
+            @Override
+            public void execute(Realm realm)
+            {
+                BitmapDrawable image = (BitmapDrawable)pic.getDrawable();
+                ByteArrayOutputStream boas=new ByteArrayOutputStream();
+                image.getBitmap().compress(Bitmap.CompressFormat.JPEG,100,boas);
+                final byte[] imageInByte = boas.toByteArray();
+
+                Photo p1 = new Photo();
+                p1.setImage(imageInByte);
+
+                art.appendPhoto(p1);
+                reload();
+            }
+        });
     }
 
     private void setFlipperImage(byte[] res)
@@ -171,8 +158,16 @@ public class ProfileActivity extends AppCompatActivity
         ImageView image = new ImageView(getApplicationContext());
         image.setImageBitmap(bitmap);
 
-        Log.v("add view", "image");
         flip.addView(image);
+    }
+
+    private void reload() {
+        list = art.getPhotos();
+        flip.removeAllViews();
+
+        for (Photo photo : list) {
+            setFlipperImage(photo.getImage());
+        }
     }
 
     @Override
@@ -182,20 +177,3 @@ public class ProfileActivity extends AppCompatActivity
         realm.close();
     }
 }
-
-//    public ArrayList<exhibit> getAvailableExhibit()
-//    {
-//        ArrayList<exhibit> art = new ArrayList<>();
-//        RealmResults<exhibit> pieces= realm.where(com.willard5991.dsmarthub.exhibit.class).findAll();
-//        for(exhibit piece: pieces)
-//        {
-//            Boolean isPresent= false;
-//            if(!isPresent)
-//            {
-//                art.add(piece);
-//            }
-//        }
-//
-//        return art;
-//    }
-
