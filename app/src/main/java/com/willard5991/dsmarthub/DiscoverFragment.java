@@ -2,7 +2,9 @@ package com.willard5991.dsmarthub;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 
@@ -23,8 +26,10 @@ public class DiscoverFragment extends Fragment {
 
     private LinearLayout ll_top;
     private LinearLayout ll_bottom;
-    private HorizontalScrollView horiz_top;
+//    private HorizontalScrollView horiz_top;
     private MainActivity mainActivity;
+    private RecyclerView recycler;
+    private Realm realm;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -38,9 +43,10 @@ public class DiscoverFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
 
         mainActivity = (MainActivity) this.getActivity();
+        realm = Realm.getDefaultInstance();
 
-        ll_top = (LinearLayout) view.findViewById(R.id.linear_layout_top);
-        horiz_top = (HorizontalScrollView) view.findViewById(R.id.horiz_top);
+        //recycler replaces the horizontal list view
+        recycler = (RecyclerView) view.findViewById(R.id.recycler);
         ll_bottom = (LinearLayout) view.findViewById(R.id.linear_layout_bottom);
 
         ArrayList<exhibit> allExhibits = this.getExhibits();
@@ -57,8 +63,12 @@ public class DiscoverFragment extends Fragment {
         }
         nClosest = sortExhibits(nClosest);
 
-        DiscoverArtworkAdapter adapterClosest = new DiscoverArtworkAdapter(this.getActivity(),nClosest);
-        horiz_top.setAdapter(adapterClosest);
+        //logging the size of the array
+        Log.v("nclosest", String.valueOf(nClosest.size()));
+
+        //replaced with a RecyclerAdapter
+        DiscoverRecyclerAdapter adapter = new DiscoverRecyclerAdapter(nClosest);
+        recycler.setAdapter(adapter);
 
         return view;
     }
@@ -66,7 +76,7 @@ public class DiscoverFragment extends Fragment {
     public ArrayList<exhibit> getExhibits(){
         ArrayList<exhibit> exhibits = new ArrayList<exhibit>();
 
-        RealmResults<exhibit> realmExhibits = mainActivity.realm.where(exhibit.class).findAll();
+        RealmResults<exhibit> realmExhibits = realm.where(exhibit.class).findAll();
         for(exhibit ex : realmExhibits){
             exhibits.add(ex);
         }
