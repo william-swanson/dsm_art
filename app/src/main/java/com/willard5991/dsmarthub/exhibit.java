@@ -14,7 +14,7 @@ public class exhibit extends RealmObject
     @PrimaryKey
     private String name;
     private String artist;
-    private int year;
+    private String year;
     private String medium;
     //private Location loc;
     private int clicks;
@@ -35,9 +35,9 @@ public class exhibit extends RealmObject
         this.artist = artist;
     }
 
-    public int getYear() { return year; }
+    public String getYear() { return year; }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

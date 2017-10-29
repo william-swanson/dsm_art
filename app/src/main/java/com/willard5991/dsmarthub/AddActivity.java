@@ -81,6 +81,8 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
                             exhibit.setArtist(artistView.getText().toString());
                             exhibit.setYear(yearView.getText().toString());
                             exhibit.setMedium(mediumView.getText().toString());
+                            exhibit.setLongitude(longitude);
+                            exhibit.setLatitude(latitude);
 
                             exhibit.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
 
