@@ -69,21 +69,21 @@ public class AddActivity extends AppCompatActivity {
                     realm.executeTransaction(new Realm.Transaction(){
                         @Override
                         public void execute(Realm realm) {
-                            exhibit exhibit = new exhibit();
-                            exhibit.setName(nameView.getText().toString());
-                            exhibit.setArtist(artistView.getText().toString());
-                            exhibit.setYear(Integer.parseInt(yearView.getText().toString()));
-                            exhibit.setMedium(mediumView.getText().toString());
+                            exhibit ex = new exhibit();
+                            ex.setName(nameView.getText().toString());
+                            ex.setArtist(artistView.getText().toString());
+                            ex.setYear(Integer.parseInt(yearView.getText().toString()));
+                            ex.setMedium(mediumView.getText().toString());
 
-                            //exhibit.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
+                            //ex.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
 
                             BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageInByte = baos.toByteArray();
-                            exhibit.setImage(imageInByte);
+                            ex.setImage(imageInByte);
 
-                            realm.copyToRealm(exhibit);
+                            realm.copyToRealm(ex);
                             finish();
                         }
                     });

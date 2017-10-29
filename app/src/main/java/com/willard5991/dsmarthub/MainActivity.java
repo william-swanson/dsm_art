@@ -1,6 +1,8 @@
 package com.willard5991.dsmarthub;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,19 +18,23 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncCredentials;
 import io.realm.SyncUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener{
+
+    public Realm realm;
+    private double latitude;
+    private double longitude;
 
     private void login(final String email, final String password, final String username){
 
-        if(SyncUser.currentUser() != null){
-            SyncUser.currentUser().logout();
-
-            Realm realm = Realm.getDefaultInstance();
-            if(realm != null){
-                realm.close();
-                Realm.deleteRealm(realm.getConfiguration());
-            }
-        }
+//        if(SyncUser.currentUser() != null){
+//            SyncUser.currentUser().logout();
+//
+//            Realm realm = Realm.getDefaultInstance();
+//            if(realm != null){
+//                realm.close();
+//                Realm.deleteRealm(realm.getConfiguration());
+//            }
+//        }
 
         SyncCredentials myCredentials = SyncCredentials.usernamePassword(email,password,false);
         SyncUser.loginAsync(myCredentials, "http://52.205.194.154:9080",new SyncUser.Callback(){
@@ -86,6 +92,35 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public double getLatitude(){
+        return this.latitude;
+    }
+
+    public double getLongitude(){
+        return this.longitude;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.longitude = location.getLongitude();
+        this.latitude = location.getLatitude();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 
 }
