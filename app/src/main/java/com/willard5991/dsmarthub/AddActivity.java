@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 
 import io.realm.Realm;
 
+
 public class AddActivity extends AppCompatActivity implements LocationListener {
     private ImageButton imageButton;
     private EditText nameView;
@@ -56,13 +57,14 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) !=null) {
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, 1);
                 }
             }
 
-
         });
+
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,23 +77,19 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
                     realm.executeTransaction(new Realm.Transaction(){
                         @Override
                         public void execute(Realm realm) {
-                            exhibit exhibit = new exhibit();
-                            exhibit.setName(nameView.getText().toString());
-                            exhibit.setArtist(artistView.getText().toString());
-                            exhibit.setYear(yearView.getText().toString());
-                            exhibit.setMedium(mediumView.getText().toString());
-//                            exhibit.setLongitude(longitude);
-//                            exhibit.setLatitude(latitude);
-
-//                            exhibit.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
+                            exhibit ex = new exhibit();
+                            ex.setName(nameView.getText().toString());
+                            ex.setArtist(artistView.getText().toString());
+                            ex.setYear(Integer.parseInt(yearView.getText().toString()));
+                            ex.setMedium(mediumView.getText().toString());
 
                             BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageInByte = baos.toByteArray();
-                            exhibit.setImage(imageInByte);
+                            ex.setImage(imageInByte);
 
-                            realm.copyToRealm(exhibit);
+                            realm.copyToRealm(ex);
                             finish();
                         }
                     });
@@ -100,6 +98,7 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
