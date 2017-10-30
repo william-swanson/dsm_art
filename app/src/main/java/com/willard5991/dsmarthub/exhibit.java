@@ -1,6 +1,8 @@
 package com.willard5991.dsmarthub;
 //import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.RealmList;
@@ -16,10 +18,9 @@ public class exhibit extends RealmObject
     private String artist;
     private String year;
     private String medium;
-    //private Location loc;
+    private String desc;
     private int clicks;
-    public byte[] image;
-
+    public RealmList<Photo> photos;
 
     public String getName() { return name; }
 
@@ -45,15 +46,17 @@ public class exhibit extends RealmObject
         return medium;
     }
 
+    public void setDesc (String desc) {
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
     public void setMedium (String medium) {
         this.medium = medium;
     }
-
-    //public Location getLoc() { return loc; }
-
-    //public void setLoc(Location loc) {
-    //    this.loc = loc;
-    //}
 
     public int getClicks() {
         return clicks;
@@ -63,13 +66,16 @@ public class exhibit extends RealmObject
         this.clicks = clicks;
     }
 
-    public byte[] getImage(){
-        return image;
+    public RealmList<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setImage(byte[] image){
-        this.image=image;
+    public void setPhotos(RealmList<Photo> photos) {
+        this.photos = photos;
     }
 
+    public void appendPhoto(Photo photo) {
+        this.photos.add(photo);
+    }
 }
 
