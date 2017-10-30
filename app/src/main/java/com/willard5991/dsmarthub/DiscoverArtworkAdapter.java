@@ -1,6 +1,7 @@
 package com.willard5991.dsmarthub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -52,6 +53,22 @@ public class DiscoverArtworkAdapter extends BaseAdapter{
         byte[] imageData = getItem(position).getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
         imageButton.setImageBitmap(bitmap);
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getBaseContext(), AddActivity.class); //TODO: will need to update the name of the class
+//                startActivity(intent);
+//            }
+//        });
+
+//        imageButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                Intent intent = new Intent(mContext,ProfileActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         return rowView;
     }

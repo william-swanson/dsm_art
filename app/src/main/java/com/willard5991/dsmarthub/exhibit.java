@@ -16,6 +16,7 @@ public class exhibit extends RealmObject
     private String artist;
     private int year;
     private String medium;
+    private String desc;
     private int clicks;
 
     private double latitude;
@@ -49,6 +50,14 @@ public class exhibit extends RealmObject
 
     public void setMedium (String medium) {
         this.medium = medium;
+    }
+
+    public void setDesc (String desc) {
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
 //    public Location getLoc() { return loc; }

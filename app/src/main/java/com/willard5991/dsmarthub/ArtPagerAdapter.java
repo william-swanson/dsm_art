@@ -29,9 +29,6 @@ public class ArtPagerAdapter  extends FragmentStatePagerAdapter {
             case 1:
                 DiscoverFragment tab2 = new DiscoverFragment();
                 return tab2;
-            case 2:
-                DiscoverFragment tab3 = new DiscoverFragment();
-                return tab3;
             default:
                 return null;
         }

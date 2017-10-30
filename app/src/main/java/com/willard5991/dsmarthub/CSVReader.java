@@ -21,18 +21,19 @@ public class CSVReader {
     }
 
     public void read() throws FileNotFoundException{
+        values = new ArrayList<String[]>();
         Scanner scan = new Scanner(new File(filename));
         scan.useDelimiter(",");
         String[] line = new String[this.categories];
         int i = 0, j = 0;
         String[] holder = new String[this.categories];
         while(scan.hasNext()) {
+            holder[j] = scan.next();
+            j++;
             if (j == this.categories) {
                 j = 0;
                 this.values.add(holder);
             }
-            holder[j] = scan.next();
-            j++;
         }
     }
 

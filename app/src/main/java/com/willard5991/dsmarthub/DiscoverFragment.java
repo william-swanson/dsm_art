@@ -9,10 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -29,6 +30,7 @@ public class DiscoverFragment extends Fragment {
 //    private HorizontalScrollView horiz_top;
     private MainActivity mainActivity;
     private RecyclerView recycler;
+    private RecyclerView recyclerPopular;
     private Realm realm;
 
     public DiscoverFragment() {
@@ -47,7 +49,7 @@ public class DiscoverFragment extends Fragment {
 
         //recycler replaces the horizontal list view
         recycler = (RecyclerView) view.findViewById(R.id.recycler);
-        ll_bottom = (LinearLayout) view.findViewById(R.id.linear_layout_bottom);
+        recyclerPopular = (RecyclerView) view.findViewById(R.id.recycler_popular);
 
         ArrayList<exhibit> allExhibits = this.getExhibits();
         ArrayList<exhibit> nClosest = new ArrayList<exhibit>();
@@ -67,8 +69,29 @@ public class DiscoverFragment extends Fragment {
         Log.v("nclosest", String.valueOf(nClosest.size()));
 
         //replaced with a RecyclerAdapter
+        exhibit test = new exhibit();
+        test.setName("test");
+        test.setArtist("test artist");
+        nClosest.add(test);
+        exhibit test2 = new exhibit();
+        test2.setName("test2");
+        test2.setArtist("test2 artist");
+        nClosest.add(test2);
+        nClosest.add(test2);
+        nClosest.add(test2);
         DiscoverRecyclerAdapter adapter = new DiscoverRecyclerAdapter(nClosest);
         recycler.setAdapter(adapter);
+
+//        bulldogList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+//                final Bulldog bulldog = (Bulldog) adapterView.getItemAtPosition(i);
+//                Intent intent = new Intent(view.getContext(), BulldogActivity.class);
+//                intent.putExtra("bulldog",bulldog.getId());
+//                startActivity(intent);
+//            }
+//        });
+        recycler.getLayoutManager();
 
         return view;
     }
