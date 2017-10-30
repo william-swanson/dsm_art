@@ -50,8 +50,8 @@ public class exhibit extends RealmObject
         return medium;
     }
 
-    public void setDesc (String desc) {
-        this.desc = desc;
+    public void setMedium (String medium) {
+        this.medium = medium;
     }
 
     public void setDesc (String desc) {
@@ -62,14 +62,17 @@ public class exhibit extends RealmObject
         return desc;
     }
 
-//    public Location getLoc() { return loc; }
 
     public void setLoc(double lat, double lon) {
         this.latitude = lat;
-        this.longitude = lon;
+        this.longitude = lon;}
 
-    public void setMedium (String medium) {
-        this.medium = medium;
+    public double getLat () {
+        return latitude;
+    }
+
+    public double getLong () {
+        return longitude;
     }
 
     public int getClicks() {
