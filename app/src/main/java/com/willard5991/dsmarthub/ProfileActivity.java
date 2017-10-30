@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,10 +21,16 @@ import android.app.Activity;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.google.android.gms.maps.*;
+
 import java.io.ByteArrayOutputStream;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+
+import static com.willard5991.dsmarthub.MapFragment.newInstance;
+import static com.willard5991.dsmarthub.R.id.nav_button;
+import static com.willard5991.dsmarthub.R.id.pin_button;
 
 public class ProfileActivity extends AppCompatActivity
 {
@@ -32,12 +39,17 @@ public class ProfileActivity extends AppCompatActivity
     private TextView art_year;
     private TextView art_desc;
     private TextView art_medium;
+    private TextView art_dist;
     private Realm realm;
     private ViewFlipper flip;
     private ImageButton add_photo_button;
+    private ImageButton pin_button;
+    private ImageButton nav_button;
+
     private RealmList<Photo> list;
     private int art_clicks;
     private ImageView pic;
+
 
     private float initialX;
     private exhibit art;
@@ -57,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity
         art_medium=(TextView) findViewById(R.id.exhibit_medium);
         flip = (ViewFlipper) findViewById(R.id.profile_pics);
         add_photo_button=(ImageButton) findViewById(R.id.add_photo_button);
+        art_dist= (TextView) findViewById(R.id.exhibit_dist);
 
         realm = Realm.getDefaultInstance();
 
@@ -67,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity
         art_year.setText(art.getYear());
         art_desc.setText(art.getDesc());
         art_medium.setText(art.getMedium());
+        art_dist.setText(String.valueOf(art.calcCrowDistance(art.getLat(),art.getLong())));
 
         reload();
 
@@ -122,6 +136,28 @@ public class ProfileActivity extends AppCompatActivity
                 {
                     startActivityForResult(takePicture, 1);
                 }
+            }
+        });
+
+        pin_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                MapFragment.newInstance(String.valueOf(art.getLat()),String.valueOf(art.getLong()));
+
+            }
+        });
+
+        nav_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                String uri = "http://maps.google.com/maps?daddr=" + String.valueOf(art.getLat()) + "," + String.valueOf(art.getLong());
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);
             }
         });
     }
