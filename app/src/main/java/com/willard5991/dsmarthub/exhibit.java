@@ -20,6 +20,10 @@ public class exhibit extends RealmObject
     private String medium;
     private String desc;
     private int clicks;
+    private double latitude;
+    private double longitude;
+
+    public byte[] image;
     public RealmList<Photo> photos;
 
     public String getName() { return name; }
@@ -50,9 +54,19 @@ public class exhibit extends RealmObject
         this.desc = desc;
     }
 
+    public void setDesc (String desc) {
+        this.desc = desc;
+    }
+
     public String getDesc() {
         return desc;
     }
+
+//    public Location getLoc() { return loc; }
+
+    public void setLoc(double lat, double lon) {
+        this.latitude = lat;
+        this.longitude = lon;
 
     public void setMedium (String medium) {
         this.medium = medium;
@@ -72,6 +86,25 @@ public class exhibit extends RealmObject
 
     public void setPhotos(RealmList<Photo> photos) {
         this.photos = photos;
+    }
+
+    public double calcCrowDistance(double lat2, double lon2){
+        double earthRad = 6371 * 1000; //km to m conversion
+        double lat1Rad = Math.toRadians(this.latitude);
+        double lat2Rad = Math.toRadians(lat2);
+
+        //Calculate change in radians
+        double deltaLatRad = Math.toRadians(lat2 - this.latitude);
+        double deltaLonRad = Math.toRadians(lon2 - this.longitude);
+
+        //calculate haversine function
+        double a = Math.sin(deltaLatRad/2)*Math.sin(deltaLatRad/2) +
+                    Math.cos(lat1Rad)*Math.cos(lat2Rad) *
+                    Math.sin(deltaLonRad/2)*Math.sin(deltaLonRad/2);
+        double c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+        double d = earthRad * c;
+
+        return d;
     }
 
     public void appendPhoto(Photo photo) {
