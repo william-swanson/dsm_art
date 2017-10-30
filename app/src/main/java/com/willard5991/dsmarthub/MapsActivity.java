@@ -30,7 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         realm = Realm.getDefaultInstance();
 
         ArrayList<exhibit[]> exhibitList = new ArrayList<exhibit[]>();
-        exhibitList.add(realm.where(exhibit.class).findAll());
+//        exhibitList.add(realm.where(exhibit.class).findAll());
     }
 
 
@@ -46,11 +46,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-    for (int i = 0; i <= exhibitList.size(); i++)
-        {
-            LatLng art = new LatLng(exhibitList.get(i).getLat, exhibitList.get(i).getLong);
-            mMap.addMarker(new MarkerOptions().position(art));
-        }
+//    for (int i = 0; i <= exhibitList.size(); i++)
+//        {
+//            LatLng art = new LatLng(exhibitList.get(i).getLat, exhibitList.get(i).getLong);
+//            mMap.addMarker(new MarkerOptions().position(art));
+//        }
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));

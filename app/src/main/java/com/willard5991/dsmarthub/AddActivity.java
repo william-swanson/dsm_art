@@ -42,7 +42,6 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-
         imageButton = (ImageButton) findViewById(R.id.add_image);
         nameView = (EditText) findViewById(R.id.add_name);
         artistView = (EditText) findViewById(R.id.add_artist);
@@ -81,10 +80,10 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
                             exhibit.setArtist(artistView.getText().toString());
                             exhibit.setYear(yearView.getText().toString());
                             exhibit.setMedium(mediumView.getText().toString());
-                            exhibit.setLongitude(longitude);
-                            exhibit.setLatitude(latitude);
+//                            exhibit.setLongitude(longitude);
+//                            exhibit.setLatitude(latitude);
 
-                            exhibit.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
+//                            exhibit.setId(realm.where(exhibit.class).findAllSorted("id").last().getId()+1);
 
                             BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
