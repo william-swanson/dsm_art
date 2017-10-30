@@ -79,14 +79,17 @@ public class AddActivity extends AppCompatActivity implements LocationListener {
                             exhibit ex = new exhibit();
                             ex.setName(nameView.getText().toString());
                             ex.setArtist(artistView.getText().toString());
-                            ex.setYear(Integer.parseInt(yearView.getText().toString()));
+                            ex.setYear(yearView.getText().toString());
                             ex.setMedium(mediumView.getText().toString());
 
                             BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageInByte = baos.toByteArray();
-                            ex.setImage(imageInByte);
+                            Photo p = new Photo();
+                            p.setName(ex.getName());
+                            p.setImage(imageInByte);
+                            ex.addPhoto(p);
 
                             realm.copyToRealm(ex);
                             finish();

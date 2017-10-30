@@ -39,13 +39,16 @@ public class SeedRealm {
             final exhibit e = new exhibit();
             e.setName(s[0]);
             e.setArtist(s[1]);
-            e.setYear(Integer.parseInt(s[2]));
+            e.setYear(s[2]);
             e.setMedium(s[3]);
             String[] coords = s[4].split("; ");
             e.setLoc(Double.parseDouble(coords[0]),Double.parseDouble(coords[1]));
             File imFile = new File(s[5]);
             byte[] image = Files.readAllBytes(imFile.toPath());
-            e.setImage(image);
+            Photo p = new Photo();
+            p.setName(s[0]);
+            p.setImage(image);
+            e.addPhoto(p);
             Scanner scan = new Scanner(new File(s[6]));
             String description = "";
             while(scan.hasNext()){

@@ -54,10 +54,6 @@ public class exhibit extends RealmObject
         this.medium = medium;
     }
 
-    public void setDesc (String desc) {
-        this.desc = desc;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -65,7 +61,9 @@ public class exhibit extends RealmObject
 
     public void setLoc(double lat, double lon) {
         this.latitude = lat;
-        this.longitude = lon;}
+        this.longitude = lon;
+    }
+
 
     public double getLat () {
         return latitude;
@@ -90,6 +88,8 @@ public class exhibit extends RealmObject
     public void setPhotos(RealmList<Photo> photos) {
         this.photos = photos;
     }
+
+    public void addPhoto(Photo p){ this.photos.add(p); }
 
     public double calcCrowDistance(double lat2, double lon2){
         double earthRad = 6371 * 1000; //km to m conversion

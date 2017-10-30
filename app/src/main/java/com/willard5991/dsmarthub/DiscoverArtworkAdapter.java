@@ -50,7 +50,7 @@ public class DiscoverArtworkAdapter extends BaseAdapter{
         name.setText(getItem(position).getName());
 
         ImageButton imageButton = rowView.findViewById(R.id.thumbnailButton);
-        byte[] imageData = getItem(position).getImage();
+        byte[] imageData = getItem(position).getPhotos().get(0).getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
         imageButton.setImageBitmap(bitmap);
 
