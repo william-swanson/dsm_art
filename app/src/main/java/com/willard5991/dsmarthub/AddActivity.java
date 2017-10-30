@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 
 import java.io.ByteArrayOutputStream;
 
+import io.realm.Realm;
+
 public class AddActivity extends AppCompatActivity {
     private ImageButton imageButton;
     private EditText nameView;
