@@ -54,5 +54,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        LatLng nomade = new LatLng(41.5849, -93.6352);
+        LatLng nats = new LatLng(41.589368, -93.613893);
+        LatLng iowaMade = new LatLng(41.59485694183984, -93.55525732040405);
+
+        mMap.addMarker(new MarkerOptions().position(nomade).title("Marker at Nomade"));
+        mMap.addMarker(new MarkerOptions().position(nats).title("Marker at No Action too Small"));
+        mMap.addMarker(new MarkerOptions().position(iowaMade).title("Marker at Iowa Made"));
     }
 }
