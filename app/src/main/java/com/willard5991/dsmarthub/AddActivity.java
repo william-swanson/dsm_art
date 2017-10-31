@@ -23,7 +23,6 @@ import java.io.ByteArrayOutputStream;
 
 import io.realm.Realm;
 
-
 public class AddActivity extends AppCompatActivity implements LocationListener {
     private ImageButton imageButton;
     private EditText nameView;
