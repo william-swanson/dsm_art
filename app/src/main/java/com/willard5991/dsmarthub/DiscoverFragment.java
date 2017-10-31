@@ -79,7 +79,7 @@ public class DiscoverFragment extends Fragment {
         nClosest.add(test2);
         nClosest.add(test2);
         nClosest.add(test2);
-        DiscoverRecyclerAdapter adapter = new DiscoverRecyclerAdapter(nClosest);
+        DiscoverRecyclerAdapter adapter = new DiscoverRecyclerAdapter(getActivity(),nClosest);
         recycler.setAdapter(adapter);
 
 //        bulldogList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
