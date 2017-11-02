@@ -57,12 +57,12 @@ public class SeedRealm {
             e.setDesc(description);
 
             exhibits.add(e);
-//            realm.executeTransaction(new Realm.Transaction(){
-//                @Override
-//                public void execute(Realm realm){
-//                    realm.copyToRealmOrUpdate(e);
-//                }
-//            });
+            realm.executeTransaction(new Realm.Transaction(){
+                @Override
+                public void execute(Realm realm){
+                    realm.copyToRealmOrUpdate(e);
+                }
+            });
         }
 
         realm.close();
@@ -86,8 +86,7 @@ public class SeedRealm {
         SyncUser.loginAsync(myCredentials, "http://52.205.194.154:9080",new SyncUser.Callback(){
             @Override
             public void onSuccess(SyncUser user){
-                SyncConfiguration configuration = new SyncConfiguration.Builder(user,
-                        "realm://52.205.194.154:9080/~/dsmarthub").disableSSLVerification().waitForInitialRemoteData().schemaVersion((long)12.0).build();
+                SyncConfiguration configuration = new SyncConfiguration.Builder(user, "realm://52.205.194.154:9080/~/dsm_art_v3").disableSSLVerification().waitForInitialRemoteData().schemaVersion((long) 16.0).build();
                 Realm.setDefaultConfiguration(configuration);
 
                 Realm.getInstanceAsync(configuration, new Realm.Callback(){

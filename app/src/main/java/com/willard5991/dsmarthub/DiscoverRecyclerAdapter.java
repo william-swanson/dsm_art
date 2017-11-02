@@ -27,20 +27,20 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         //view variables here
         TextView name;
         ImageButton iButton;
-        private View view;
+        //private View view;
 
         public MyViewHolder(View view) {
             super(view);
-            this.view = view;
+            //this.view = view;
             //use findviewbyid here on your cell
             name = (TextView) view.findViewById(R.id.thumbnailLabel);
             iButton = (ImageButton) view.findViewById(R.id.thumbnailButton);
 
         }
 
-        public View getView(){
-            return this.view;
-        }
+        //public View getView(){
+        //    return this.view;
+        //}
     }
 
     public DiscoverRecyclerAdapter(Context context, List<exhibit> dataSource) {
