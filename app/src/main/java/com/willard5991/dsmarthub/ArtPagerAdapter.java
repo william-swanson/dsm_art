@@ -9,8 +9,7 @@ import android.view.MotionEvent;
  * Created by clayton on 10/29/17.
  */
 
-//This is my pageradapter to get the tabs to work
-//If you've already done this elsewhere, feel free to remove
+
 public class ArtPagerAdapter  extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 

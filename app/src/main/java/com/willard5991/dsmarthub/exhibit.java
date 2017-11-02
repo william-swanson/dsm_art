@@ -58,6 +58,8 @@ public class exhibit extends RealmObject
         return desc;
     }
 
+    public void setDesc(String s){ this.desc = s; }
+
 
     public void setLoc(double lat, double lon) {
         this.latitude = lat;
